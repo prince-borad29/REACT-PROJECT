@@ -1,5 +1,5 @@
 import conf from '../conf/conf'
-import { getFirestore } from "firebase/firestore";
+import { getDoc, getFirestore } from "firebase/firestore";
 import { initializeApp } from 'firebase/app';
 import { addDoc, collection } from 'firebase/firestore';
 
@@ -22,39 +22,29 @@ export class ServiceDB {
     }
 
     //create post
-     createPost() {
+    async createPost() {
         try {
             // console.log('inside method : ',this?.databases);
-                
-            return this?.databases
-            // await addDoc(
-            //     collection(this.databases,"expense-data") , 
-            //     {
-            //         expense_category : "Food",
-            //         expense_amount : 503
-            //     }
-            // )
+            return await addDoc(
+                collection(this.databases,"expense-data") , 
+                {
+                    expense_category : "Food",
+                    expense_amount : 503
+                }
+            )
         } catch (error) {
             console.log("Firebase Service :: createPost :: Error ", error);
         }
     }
 
     //update post
-    async updatePost(slug, { title, content, featuredImage, status }) {
+    async updatePost() {
         try {
-            return await this.databases.updateDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
-                slug,
-                {
-                    title,
-                    content,
-                    featuredImage,
-                    status
-                }
+            return await updateDocument(
+                
             )
         } catch (error) {
-            console.log("Appwrite Service :: Error :: updatePost ", error);
+            console.log("Firebase Service :: Error :: updatePost ", error);
         }
     }
 
@@ -62,13 +52,11 @@ export class ServiceDB {
     async deletePost(slug) {
         try {
             await this.databases.deleteDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
-                slug
+            
             );
             return true;
         } catch (error) {
-            console.log("Appwrite Service :: deletePost :: Error ", error);
+            console.log("Firebase Service :: deletePost :: Error ", error);
             return false;
         }
     }
@@ -76,13 +64,12 @@ export class ServiceDB {
     //list one post
     async getPost(slug) {
         try {
-            return await this.databases.getDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
-                slug
+            return await getDoc(
+                collection ,
+                
             )
         } catch (error) {
-            console.log("Appwrite Service :: getPost :: Error ", error);
+            console.log("Firebase Service :: getPost :: Error ", error);
             return false;
         }
     }
@@ -91,13 +78,13 @@ export class ServiceDB {
     async getPosts(queries = [Query.equal("Status", "Active")]) {
         try {
             return await this.databases.listDocuments(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
+                conf.FirebaseDatabaseId,
+                conf.FirebaseCollectionId,
                 //for queries index is required on attributes 
                 [queries]
             )
         } catch (error) {
-            console.log("Appwrite Service :: getPosts :: Error ", error);
+            console.log("Firebase Service :: getPosts :: Error ", error);
             return false;
         }
     }
