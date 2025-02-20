@@ -5,6 +5,7 @@ import ExpenseCard from "./ExpenseCard";
 import ExpenseListComponent from "./ExpenseListComponent";
 import Input from "./Input";
 import SummaryCard from "./SummaryCard";
+import Spinner from "./Spinner";
 export {
     Login,
     Navbar,
@@ -12,5 +13,6 @@ export {
     ExpenseCard,
     ExpenseListComponent,
     Input,
-    SummaryCard
+    SummaryCard,
+    Spinner
 }

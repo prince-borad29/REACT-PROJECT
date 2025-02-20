@@ -5,6 +5,7 @@ import ExpenseList from "./pages/ExpensePage";
 import Reports from "./pages/Reports";
 import Setting from "./pages/Setting";
 import Navbar from "./Component/Navbar"; // Add a Navbar component
+import DataTest from "./pages/dataTest";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <div className="container mx-auto p-6">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/test" element={<DataTest />} />
           <Route path="/add-expense" element={<AddExpense />} />
           <Route path="/expenses" element={<ExpenseList />} />
           <Route path="/reports" element={<Reports />} />

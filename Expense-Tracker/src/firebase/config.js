@@ -1,11 +1,10 @@
 import conf from '../conf/conf'
-import { getDoc, getFirestore } from "firebase/firestore";
+import { deleteDoc, doc, getDocs, getFirestore, updateDoc } from "firebase/firestore";
 import { initializeApp } from 'firebase/app';
 import { addDoc, collection } from 'firebase/firestore';
 
 export class ServiceDB {
-    app;
-    databases;
+  
 
     constructor() {
         this.app = new initializeApp({
@@ -17,19 +16,22 @@ export class ServiceDB {
             appId: conf.firebaseAppId,
         });
         this.databases = new getFirestore(this.app);
-        this.createPost = this.createPost.bind(this)
+        // this.createPost = this.createPost.bind(this)
+        // this.getDoc = this.getDoc.bind(this)
         // console.log('constructure : ',this.databases);
     }
 
     //create post
-    async createPost() {
+    async createDoc(category, amount) {
         try {
             // console.log('inside method : ',this?.databases);
+            console.log(`cat :: ${category} || amt :: ${amount}`);
+            
             return await addDoc(
                 collection(this.databases,"expense-data") , 
-                {
-                    expense_category : "Food",
-                    expense_amount : 503
+                {   
+                    expense_category : category,//{category} give object with key and value in js 
+                    expense_amount : amount
                 }
             )
         } catch (error) {
@@ -40,7 +42,7 @@ export class ServiceDB {
     //update post
     async updatePost() {
         try {
-            return await updateDocument(
+            return await updateDoc(
                 
             )
         } catch (error) {
@@ -49,10 +51,10 @@ export class ServiceDB {
     }
 
     //delete post
-    async deletePost(slug) {
+    async deleteDoc(id) {
         try {
-            await this.databases.deleteDocument(
-            
+            await deleteDoc(
+                doc(this.databases,"expense-data",id)
             );
             return true;
         } catch (error) {
@@ -62,32 +64,30 @@ export class ServiceDB {
     }
 
     //list one post
-    async getPost(slug) {
+    async getDoc() {
         try {
-            return await getDoc(
-                collection ,
-                
-            )
+            const res = await getDocs(collection(this.databases ,"expense-data" ))
+            return res;
         } catch (error) {
-            console.log("Firebase Service :: getPost :: Error ", error);
+            console.log("Firebase Service :: getDocs :: Error ", error);
             return false;
         }
     }
 
     //list all posts which are active
-    async getPosts(queries = [Query.equal("Status", "Active")]) {
-        try {
-            return await this.databases.listDocuments(
-                conf.FirebaseDatabaseId,
-                conf.FirebaseCollectionId,
-                //for queries index is required on attributes 
-                [queries]
-            )
-        } catch (error) {
-            console.log("Firebase Service :: getPosts :: Error ", error);
-            return false;
-        }
-    }
+    // async getPosts(queries = [Query.equal("Status", "Active")]) {
+    //     try {
+    //         return await this.databases.listDocuments(
+    //             conf.FirebaseDatabaseId,
+    //             conf.FirebaseCollectionId,
+    //             //for queries index is required on attributes 
+    //             [queries]
+    //         )
+    //     } catch (error) {
+    //         console.log("Firebase Service :: getPosts :: Error ", error);
+    //         return false;
+    //     }
+    // }
 
 }
 
