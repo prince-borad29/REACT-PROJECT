@@ -2,14 +2,19 @@ import React from "react";
 import Button from "./Button";
 import service from "../firebase/config";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { deleteDoc as deleteFromState} from "../store/expenseSlice";
 
 const ExpenseCard = ( {expense}) => {
     // console.log(expense);
 
     const navigate = useNavigate()
 
+    const dispatch = useDispatch()
+
     const deleteDoc = async (e) => {
        await service.deleteDoc(expense.id)
+        dispatch(deleteFromState(expense.id))
        navigate("/")
     }
 

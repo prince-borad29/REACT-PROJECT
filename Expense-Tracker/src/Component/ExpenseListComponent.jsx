@@ -25,13 +25,14 @@ const ExpenseListComponent = () => {
         dispatch(setDoc(dataDocs))
         setLoader(false)
     }, [dispatch])
+
+    
     
     useEffect(() => {
         fetchData()
-    }, [])
+    }, [useSelector(state => state.expenseReducer.change)])
 
-     const docs = useSelector(state => state.expenseReducer.data);
-
+    var docs = useSelector(state => state.expenseReducer.data);
 
     return (
         <div className="p-4 bg-gray-100 rounded-lg">

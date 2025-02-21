@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    data : {}
+    data : {},
+    change : true
 }
 
 const expenseSlice = createSlice({
@@ -10,11 +11,15 @@ const expenseSlice = createSlice({
     reducers:{
         setDoc : (state,action) => {
             state.data = action.payload
+        },
+        deleteDoc : (state,action) => {
+            state.data = state.data.filter(data => data.id !== action.payload) 
+            state.change = !state.change
         }
     }
 
 })
 
-export const {setDoc} = expenseSlice.actions;
+export const {setDoc,deleteDoc} = expenseSlice.actions;
 
 export default expenseSlice.reducer;
