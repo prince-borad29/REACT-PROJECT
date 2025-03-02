@@ -2,13 +2,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react"; // Icon library
 import { useLocation } from "react-router-dom";
+import DarkTheme from "./DarkTheme";
+import Logout from "./Logout";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation()
 
     return (
-        <nav className="bg-white text-black p-4 border-gray shadow-md">
+        <nav className="dark:bg-gray-800 dark:text-white  text-black p-4 border-gray shadow-md">
             <div className="container mx-auto flex justify-between items-center">
                 {/* Logo */}
                 <Link to="/" className="text-2xl font-bold">
@@ -16,18 +18,24 @@ const Navbar = () => {
                 </Link>
 
                 {/* Desktop Menu */}
-                <ul className="hidden md:flex space-x-6">
-                    <li>
-                        <Link to="/" className={` hover:text-gray-300 ${location.pathname == '/' ? "text-black" : "text-gray-500"} `}>Home</Link>
+                <ul className=" hidden md:flex space-x-6">
+                    <li className="mt-2">
+                        <Link to="/" className={` hover:text-gray-300 ${location.pathname == '/' ? "text-white" : "text-gray-500"} `}>Home</Link>
                     </li>
-                    <li>
-                        <Link to="/add-expense" className={` hover:text-gray-300 ${location.pathname == '/add-expense' ? "text-black" : "text-gray-500"} `}>Add Expense</Link>
+                    <li className="mt-2">
+                        <Link to="/add-expense" className={` hover:text-gray-300 ${location.pathname == '/add-expense' ? "text-white" : "text-gray-500"} `}>Add Expense</Link>
                     </li>
-                    <li>
-                        <Link to="/reports" className={` hover:text-gray-300 ${location.pathname == '/reports' ? "text-black" : "text-gray-500"} `}>Reports</Link>
+                    <li className="mt-2">
+                        <Link to="/reports" className={` hover:text-gray-300 ${location.pathname == '/reports' ? "text-white" : "text-gray-500"} `}>Reports</Link>
                     </li>
-                    <li>
-                        <Link to="/settings" className={` hover:text-gray-300 ${location.pathname == '/settings' ? "text-black" : "text-gray-500"} `}>Settings</Link>
+                    <li className="mt-2">
+                        <Link to="/settings" className={` hover:text-gray-300 ${location.pathname == '/settings' ? "text-white" : "text-gray-500"} `}>Settings</Link>
+                    </li>
+                    <li >
+                        <Logout/>
+                    </li>
+                    <li className="mt-2">
+                        <DarkTheme/>
                     </li>
                 </ul>
 
@@ -39,7 +47,7 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <ul className="md:hidden bg-white p-4 ">
+                <ul className="dark:bg-gray-600 dark:text-white md:hidden bg-white p-4 ">
                     <li>
                         <Link to="/" className="block py-2 hover:text-purple-600" onClick={() => setIsOpen(false)}>Home</Link>
                     </li>

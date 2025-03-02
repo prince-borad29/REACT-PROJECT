@@ -10,7 +10,7 @@ const SummaryCard = ({ title, amount, color = "bg-blue-500", className = "text-b
                 {title}
             </h3>
             <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mt-2">
-                ${amount}
+                ₹{amount}
             </p>
         </div>
     );

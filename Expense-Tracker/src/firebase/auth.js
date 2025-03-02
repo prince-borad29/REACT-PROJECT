@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-catch */
 import conf from '../conf/conf'
-import {getAuth , createUserWithEmailAndPassword} from 'firebase/auth'
-import {initializeApp} from 'firebase/app'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'
+import { initializeApp } from 'firebase/app'
 
 export class AuthService {
     auth;
@@ -25,14 +25,16 @@ export class AuthService {
     /**
     using async because untill registration is not completed we can't process furthure
     */
-    async createAccount({ email, password, name }) {
+    async createAccount(email, password) {
         // eslint-disable-next-line no-useless-catch
         try {
-            const userAccount = await this.account.create(ID.unique(), email, password, name);
+            const userAccount = await createUserWithEmailAndPassword(this.auth, email, password)
 
             if (userAccount) {
                 //call another method for login user to app after successful registration
-                return this.login({ email, password });
+                // console.log(userAccount.user);
+
+                // return this.login({ email, password });
             }
 
             else {
@@ -44,10 +46,11 @@ export class AuthService {
         }
     }
 
-    async login({ email, password }) {
+    async login(email, password) {
+        // console.log(email , password);
 
         try {
-            return await this.account.createEmailPasswordSession(email, password);
+            return await signInWithEmailAndPassword(this.auth, email, password);
         }
         catch (error) {
             console.log("Appwrite service :: login :: error ", error);
@@ -55,18 +58,31 @@ export class AuthService {
     }
 
     async getCurrentUser() {
-        try {
-            return await this.account.get();
-        } catch (error) {
-            console.log("Appwrite service :: getCurrentUser :: error ", error);
-        }
+        return new Promise((resolve, reject) => {
+            try {
+                onAuthStateChanged(this.auth, (user) => {
+                    // console.log('userAuth Outside :: ',user);
 
-        return null;
+                    if (user) {
+                        // console.log('userInside IF : ' + user.uid);
+                        resolve(user.uid)
+                    }
+                    else {
+                        resolve(0)
+                    }
+                })
+            } catch (error) {
+                console.log('ERROR :: GET CUR USER :: AUTH :: ', error);
+                reject(error)
+            }
+        }
+        )
+
     }
 
     async logout() {
         try {
-            await this.account.deleteSessions();
+            await signOut(this.auth);
         } catch (error) {
             console.log("Appwrite service :: logout :: error ", error);
         }

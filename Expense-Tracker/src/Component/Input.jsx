@@ -7,7 +7,7 @@ const Input = ({  type = "text" , ...props },ref) => {
             <input
                 ref={ref}
                 type={type}
-                className="mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 p-2 border-2 dark:bg-transparent dark:text-white bg-white shadow-md rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                {...props}
             />
         </div>

@@ -1,7 +1,7 @@
 import conf from '../conf/conf'
-import { deleteDoc, doc, getDocs, getFirestore, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDocs, getFirestore, query, updateDoc , where } from "firebase/firestore";
 import { initializeApp } from 'firebase/app';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection , Timestamp } from 'firebase/firestore';
 
 export class ServiceDB {
   
@@ -22,16 +22,19 @@ export class ServiceDB {
     }
 
     //create post
-    async createDoc(category, amount) {
+    async createDoc(category, amount , date , type , uid) {
+        // console.log(`cat : ${category} || Amt : ${amount} || Date : ${date} || Type : ${type}`);
+        
         try {
-            // console.log('inside method : ',this?.databases);
-            console.log(`cat :: ${category} || amt :: ${amount}`);
             
             return await addDoc(
                 collection(this.databases,"expense-data") , 
                 {   
                     expense_category : category,//{category} give object with key and value in js 
-                    expense_amount : amount
+                    expense_amount : parseInt(amount),
+                    expense_date : Timestamp.fromDate(new Date(date)),
+                    expense_type : type,
+                    user_id : uid
                 }
             )
         } catch (error) {
@@ -40,10 +43,19 @@ export class ServiceDB {
     }
 
     //update post
-    async updatePost() {
+    async updateDoc(id,category,amount,date,type) {
         try {
+            // console.log(`ID => ${id} || Category => ${category} || Amount => ${amount} || Date => ${date} || Type => ${type}`);
+            // console.log(new Date(date));
+            
             return await updateDoc(
-                
+                doc(this.databases,"expense-data",id),
+                {
+                    expense_category : category,//{category} give object with key and value in js 
+                    expense_amount : parseInt(amount),
+                    expense_date : Timestamp.fromDate(new Date(date)),
+                    expense_type : type,
+                }
             )
         } catch (error) {
             console.log("Firebase Service :: Error :: updatePost ", error);
@@ -64,30 +76,17 @@ export class ServiceDB {
     }
 
     //list one post
-    async getDoc() {
+    async getDoc(id) {        
         try {
-            const res = await getDocs(collection(this.databases ,"expense-data" ))
-            return res;
+            const q = query(collection(this.databases,"expense-data"),where("user_id","==",id))
+            const res = await getDocs(q)
+            
+            return res.docs;
         } catch (error) {
             console.log("Firebase Service :: getDocs :: Error ", error);
             return false;
         }
     }
-
-    //list all posts which are active
-    // async getPosts(queries = [Query.equal("Status", "Active")]) {
-    //     try {
-    //         return await this.databases.listDocuments(
-    //             conf.FirebaseDatabaseId,
-    //             conf.FirebaseCollectionId,
-    //             //for queries index is required on attributes 
-    //             [queries]
-    //         )
-    //     } catch (error) {
-    //         console.log("Firebase Service :: getPosts :: Error ", error);
-    //         return false;
-    //     }
-    // }
 
 }
 

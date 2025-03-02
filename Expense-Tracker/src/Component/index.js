@@ -6,6 +6,12 @@ import ExpenseListComponent from "./ExpenseListComponent";
 import Input from "./Input";
 import SummaryCard from "./SummaryCard";
 import Spinner from "./Spinner";
+import RadioButtonGroup from "./RadioButtonGroup";
+import DarkTheme from "./DarkTheme";
+import SignUp from "./SignUp"
+import AuthLayout from './AuthLayout'
+import Footer from "./Footer";
+
 export {
     Login,
     Navbar,
@@ -14,5 +20,10 @@ export {
     ExpenseListComponent,
     Input,
     SummaryCard,
-    Spinner
+    Spinner,
+    RadioButtonGroup,
+    DarkTheme,
+    SignUp,
+    AuthLayout,
+    Footer
 }
