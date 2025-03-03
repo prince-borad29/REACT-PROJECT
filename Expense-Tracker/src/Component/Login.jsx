@@ -32,11 +32,11 @@ const Login = () => {
                 navigate("/");
             }
             else{
-                setError("Username or Password Doesn't Match")
+                setError(() => "Username or Password Doesn't Match")
             }
         } catch (error) {
             setError("Username or Password Doesn't Match")
-            console.error("Login failed:", error);
+            console.error(() => "Login failed:", error);
         }
         
 
