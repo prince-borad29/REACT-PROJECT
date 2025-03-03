@@ -50,7 +50,8 @@ export class AuthService {
         // console.log(email , password);
 
         try {
-            return await signInWithEmailAndPassword(this.auth, email, password);
+            const userInfo = await signInWithEmailAndPassword(this.auth, email, password);
+            return userInfo.user
         }
         catch (error) {
             console.log("Appwrite service :: login :: error ", error);

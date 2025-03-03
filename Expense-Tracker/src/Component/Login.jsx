@@ -16,20 +16,16 @@ const Login = () => {
 
 
     const login = async (data) => {
-        // console.log(data);
-        
-        // await authService.login(data.email,data.pwd)
-        // dispatch(loginStore())
-        // navigate('/')
 
         try {
             const user = await authService.login(data.email, data.pwd);
             if (user) {
-                const atho = await authService.getCurrentUser();
-                if (atho) {
-                    dispatch(loginStore(user));
-                }
-                navigate("/");
+                authService.getCurrentUser().then((userData) => {
+                    if (userData) {
+                        dispatch(loginStore({ id: userData.id, email: userData.email }));
+                        navigate("/");
+                    }
+                });
             }
             else{
                 setError(() => "Username or Password Doesn't Match")

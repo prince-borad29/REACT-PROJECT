@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    uid : "",
-    useremail : "",
+    uid : null,
+    useremail : null,
     data : [],
     change : true,
     income : 0,
@@ -36,13 +36,16 @@ const expenseSlice = createSlice({
             state.darkTheme = !state.darkTheme
         },
         login : (state,action) => {
+            // const {id,email} = 
+            
             state.isLoggedIn = true
             state.uid = action.payload.id
             state.useremail = action.payload.email
         },
         logout : (state) => {
             state.isLoggedIn = false
-            state.id = ""
+            state.id = null
+            state.useremail = null
             state.data = {}
             state.balance = 0
             state.income = 0

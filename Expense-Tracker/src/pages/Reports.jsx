@@ -1,11 +1,14 @@
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import service from '../firebase/config'
 import { useEffect, useState } from "react";
-
+import { useSelector } from "react-redux";
 
 // console.log(COLORS);
 
 const Reports = () => {
+
+    
+    const uid = useSelector(state => state.expenseReducer.uid)
 
     function getRandomColor() {
         return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
@@ -21,18 +24,20 @@ const Reports = () => {
 
     const fetchData = async () => {
 
-        const dataDoc = await service.getDoc()
+        
+
+        const dataDoc = await service.getDoc(uid)
 
         dataDoc.forEach((dt) => {
             const doc = dt.data()
             if (doc.expense_type === "Expense") {
                 setData((prev) => [...prev  ,{ name: doc.expense_category, value: doc.expense_amount }])
-                console.log(data);
+                // console.log(data);
                 data.push({ name: doc.expense_category, value: doc.expense_amount })
             }
             // console.log(`cate : ${doc.expense_category} || Amount : ${doc.expense_amount} ||type : ${doc.expense_type}`);
         })
-
+        
         // console.log(data);
 
     }

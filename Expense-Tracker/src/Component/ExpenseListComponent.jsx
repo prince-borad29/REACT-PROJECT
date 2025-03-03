@@ -5,9 +5,6 @@ import service from "../firebase/config";
 import { useSelector } from "react-redux";
 import {Spinner} from "./index";
 import { setDoc, setBalance, setExpense, setIncome } from "../store/expenseSlice";
-import { X } from "lucide-react";
-import authService from "../firebase/auth";
-
 
 const ExpenseListComponent = () => {    
 
@@ -15,30 +12,28 @@ const ExpenseListComponent = () => {
     const [loader, setLoader] = useState(true)
     const uid = useSelector(state => state.expenseReducer.uid)
     const auth = useSelector(state => state.expenseReducer.isLoggedIn)
-
     
     const fetchData = useCallback(async () => {
         /* variables for balance , income and expense */
         var balance = 0 , income = 0 , expense = 0
         setLoader(true)
 
-        const data =  await service.getDoc(uid)
+        const data = await service.getDoc(uid)
         // console.log(data);
 
         const dataDocs = [] 
 
-        data.map((data) => {
+        data.forEach((data) => {
             //calculating income , expense , balance
             data.data().expense_type === "Income" ?  income += parseInt(data.data().expense_amount) : expense += parseInt(data.data().expense_amount)
-            
+
             let dataObj = { id : "" , data: {} }
 
             dataObj = { ...dataObj, id: data.id , data: { ...data.data(), expense_date: new Date(data.data().expense_date.seconds * 1000).toDateString() } }
             // console.log('dataObj=>' + JSON.stringify({...data.data(),expense_date:Date(data.expense_date)}));
             dataDocs.push(dataObj)
-            
-        })
 
+        })
 
         dispatch(setDoc(dataDocs))
 
@@ -49,15 +44,16 @@ const ExpenseListComponent = () => {
         balance = income - expense
         dispatch(setBalance(balance))
 
-    }, [dispatch])
+    }, [])
 
     const change = useSelector(state => state.expenseReducer.change)
-    
+
     useEffect(() => {
-        auth && fetchData()
+        auth && uid && fetchData()
     }, [change])
 
-    var docs = useSelector(state => state.expenseReducer.data);
+    // var docs = useSelector(state => state.expenseReducer.data);
+    var docs =  useSelector(state => state.expenseReducer.data) || []
 
     return (
         <div className="p-4 rounded-lg">
