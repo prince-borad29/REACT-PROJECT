@@ -18,7 +18,7 @@ const ExpenseListComponent = () => {
         var balance = 0 , income = 0 , expense = 0
         setLoader(true)
 
-        const data = await service.getDoc(uid)
+        const data = await service.getDoc(uid) || []
         // console.log(data);
 
         const dataDocs = [] 
@@ -49,19 +49,19 @@ const ExpenseListComponent = () => {
     const change = useSelector(state => state.expenseReducer.change)
 
     useEffect(() => {
-        auth && uid && fetchData()
-    }, [change])
+        auth && uid ? fetchData() : ""
+    }, [change,uid])
 
     // var docs = useSelector(state => state.expenseReducer.data);
-    var docs =  useSelector(state => state.expenseReducer.data) || []
+    var docs = useSelector(state => state.expenseReducer.data) || []
 
     return (
         <div className="p-4 rounded-lg">
 
+            { console.log('docs :: '+docs)}
             {!loader ?
-                // console.log('docs :: '+docs)
 
-                docs.map((doc,index) => {
+                docs?.map((doc,index) => {
                     // console.log(`ID : ${doc.id} => EXPENSE CATEGORY :: ${doc.data.expense_category} || EXPENSE AMOUNT :: ${doc.data.expense_amount}`);
                     // console.log(`index :: ${index} || data at index => ${doc.data.expense_category}`);
 

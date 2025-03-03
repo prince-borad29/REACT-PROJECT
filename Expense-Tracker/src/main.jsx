@@ -11,6 +11,7 @@ import ExpenseList from "./pages/ExpensePage";
 import Reports from "./pages/Reports";
 import Setting from "./pages/Setting";
 import { Login, SignUp , AuthLayout} from "./Component";
+import Logout from './Component/Logout.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
