@@ -4,7 +4,7 @@ const store = configureStore({
     reducer: {
         expenseReducer
     },
-    // devTools: false,
+    devTools: false,
 })
 
 export default store

@@ -19,7 +19,6 @@ export default function Protected({ children, authentication = true }) {
     // })
 
     useEffect(() => {
-        console.log("IN UseEffect OF AuthLayout");
         
         if (authStatus === null || undefined) console.log("auth is undefined");
 
