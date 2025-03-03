@@ -65,7 +65,7 @@ export class AuthService {
 
                     if (user) {
                         // console.log('userInside IF : ' + user.uid);
-                        resolve(user.uid)
+                        resolve({id : user.uid,email : user.email})
                     }
                     else {
                         resolve(0)

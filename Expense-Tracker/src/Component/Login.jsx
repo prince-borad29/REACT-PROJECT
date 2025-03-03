@@ -5,6 +5,7 @@ import authService from "../firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { login as loginStore} from "../store/expenseSlice";
 import { Link, useNavigate } from "react-router";
+import {FcGoogle} from "react-icons/fc"
 
 
 const Login = () => {
@@ -26,7 +27,7 @@ const Login = () => {
             if (user) {
                 const atho = await authService.getCurrentUser();
                 if (atho) {
-                    dispatch(loginStore(user.uid));
+                    dispatch(loginStore(user));
                 }
                 navigate("/");
             }
@@ -57,7 +58,7 @@ const Login = () => {
                             <Input
                                 type="email"
                                 placeholder="Enter your email"
-                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                                className="w-full p-3 border rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
                                 {...register("email",{required : true})}
                             />
                         </div>
@@ -72,18 +73,14 @@ const Login = () => {
                             >
                                 Password
                             </label>
-                            <a
-                                href="#"
-                                className="text-sm text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
-                            >
-                                Forgot password?
-                            </a>
+                            
+                            {/* <Link to="/forgotpassword" className="font-semibold text-blue-600 hover:text-indigo-500">Forgot password?</Link> */}
                         </div>
                         <div className="mt-2">
                             <Input
                                 type="password"
                                 placeholder="Enter your password"
-                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                                className="w-full p-3 border rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
                                 {...register("pwd",{required:true})}
                             />
                         </div>
@@ -93,33 +90,29 @@ const Login = () => {
                     <div>
                         <Button
                             type="submit"
-                            className="flex w-full justify-center rounded-lg bg-indigo-600 px-5 py-3 text-base font-semibold text-white shadow-md hover:bg-indigo-500 transition duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            className="cursor-pointer flex w-full justify-center rounded-lg bg-indigo-600 px-5 py-3 text-base font-semibold text-white shadow-md hover:bg-indigo-500 transition duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
                             Sign in
                         </Button>
                     </div>
 
-                    {/* Divider */}
+                    {/* Divider
                     <div className="relative flex items-center justify-center">
                         <span className="absolute bg-white dark:bg-gray-800 px-4 text-gray-500">
                             or
                         </span>
                         <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
-                    </div>
+                    </div> */}
 
                     {/* Sign in with Google */}
-                    <div>
+                    {/* <div>
                         <button
-                            className="flex w-full items-center justify-center space-x-2 rounded-lg border border-gray-300 dark:border-gray-600 px-5 py-3 text-base font-semibold text-gray-700 dark:text-white shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300"
+                            className="cursor-pointer flex w-full items-center justify-center space-x-2 rounded-lg border border-gray-300 dark:border-gray-600 px-5 py-3 text-base font-semibold text-gray-700 dark:text-white shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300"
                         >
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-                                alt="Google"
-                                className="h-5 w-5"
-                            />
+                            <FcGoogle className="h-6 w-6 "/>
                             <span>Sign in with Google</span>
                         </button>
-                    </div>
+                    </div> */}
                 </form>
 
                 {/* Signup Link */}

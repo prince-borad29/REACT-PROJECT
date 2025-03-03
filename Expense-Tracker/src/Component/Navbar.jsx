@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react"; // Icon library
 import { useLocation } from "react-router-dom";
 import DarkTheme from "./DarkTheme";
 import Logout from "./Logout";
+import Avtar from "./Avtar";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -36,6 +37,9 @@ const Navbar = () => {
                     </li>
                     <li className="mt-2">
                         <DarkTheme/>
+                    </li>
+                    <li>
+                        <Avtar/>
                     </li>
                 </ul>
 

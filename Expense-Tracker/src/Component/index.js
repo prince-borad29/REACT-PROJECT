@@ -11,6 +11,7 @@ import DarkTheme from "./DarkTheme";
 import SignUp from "./SignUp"
 import AuthLayout from './AuthLayout'
 import Footer from "./Footer";
+import Avtar from "./Avtar";
 
 export {
     Login,
@@ -25,5 +26,6 @@ export {
     DarkTheme,
     SignUp,
     AuthLayout,
-    Footer
+    Footer,
+    Avtar
 }
