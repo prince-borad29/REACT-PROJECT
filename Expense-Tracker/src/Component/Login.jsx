@@ -35,6 +35,7 @@ const Login = () => {
                 setError("Username or Password Doesn't Match")
             }
         } catch (error) {
+            setError("Username or Password Doesn't Match")
             console.error("Login failed:", error);
         }
         
