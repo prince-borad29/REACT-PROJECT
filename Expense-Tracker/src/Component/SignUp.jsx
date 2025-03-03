@@ -18,7 +18,7 @@ const SignUp = () => {
         if (data.pwd === data.confirmPwd) {
             if (data.pwd.length >= 6) {
                const user = await authService.createAccount(data.email, data.pwd)
-               if(user.user){
+               if(user){
                     await authService.login(data.email,data.pwd)
                     dispatch(login())
                     navigate('/')
@@ -102,13 +102,13 @@ const SignUp = () => {
                     </div>
 
                     {/* Divider */}
-                    <div className="relative flex items-center justify-center">
+                    {/* <div className="relative flex items-center justify-center">
                         <span className="absolute bg-white px-4 text-gray-500">or</span>
                         <div className="w-full border-t border-gray-300"></div>
-                    </div>
+                    </div> */}
 
                     {/* Sign up with Google */}
-                    <div>
+                    {/* <div>
                         <button
                             className="flex w-full items-center justify-center space-x-2 rounded-lg border border-gray-300 px-5 py-3 text-base font-semibold text-gray-700 shadow-md hover:bg-gray-100 transition duration-300"
                         >
@@ -119,7 +119,7 @@ const SignUp = () => {
                             />
                             <span>Sign up with Google</span>
                         </button>
-                    </div>
+                    </div> */}
                 </form>
 
                 {/* Already have an account? */}
