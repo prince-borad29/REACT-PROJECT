@@ -11,8 +11,7 @@ import AddExpense from "./pages/AddExpense";
 import ExpenseList from "./pages/ExpensePage";
 import Reports from "./pages/Reports";
 import Setting from "./pages/Setting";
-import DataTest from "./pages/dataTest";
-import { Login, SignUp , AuthLayout, Spinner , Navbar} from "./Component";
+import { Login, SignUp , AuthLayout} from "./Component";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,7 +19,6 @@ const router = createBrowserRouter(
            <Route path="/login" element={<AuthLayout authentication={false}><Login /></AuthLayout>} />
           <Route path="/signUp" element={<AuthLayout authentication={false}><SignUp /></AuthLayout>} />
           <Route path="/" element={<AuthLayout authentication><Home /></AuthLayout>} />
-          <Route path="/test" element={<DataTest />} />
           <Route path="/add-expense" element={<AuthLayout authentication><AddExpense /></AuthLayout>} />
           <Route path="/expenses" element={<AuthLayout authentication><ExpenseList /></AuthLayout>} />
           <Route path="/reports" element={<AuthLayout authentication><Reports /></AuthLayout>} />
