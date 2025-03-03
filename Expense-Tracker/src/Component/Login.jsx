@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Button } from "./index";
 import { useForm } from "react-hook-form";
 import authService from "../firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { login as loginStore} from "../store/expenseSlice";
 import { Link, useNavigate } from "react-router";
-import {FcGoogle} from "react-icons/fc"
 
 
 const Login = () => {
@@ -13,6 +12,7 @@ const Login = () => {
     const {register,handleSubmit} = useForm()
     const dispatch = useDispatch()
     const navigate = useNavigate() 
+    const [error,setError] = useState("")
 
 
     const login = async (data) => {
@@ -30,6 +30,9 @@ const Login = () => {
                     dispatch(loginStore(user));
                 }
                 navigate("/");
+            }
+            else{
+                setError("Username or Password Doesn't Match")
             }
         } catch (error) {
             console.error("Login failed:", error);
@@ -94,6 +97,9 @@ const Login = () => {
                         >
                             Sign in
                         </Button>
+                        <div className="text-red-600 m-2">
+                            {error !== "" && error}
+                        </div>
                     </div>
 
                     {/* Divider
