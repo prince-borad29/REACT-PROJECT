@@ -4,7 +4,7 @@ import { Spinner, Navbar, Footer } from "./Component";
 import { useDispatch, useSelector } from "react-redux";
 import authService from "./firebase/auth";
 import { login, logout } from "./store/expenseSlice";
-
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
 
@@ -35,8 +35,11 @@ function App() {
         {auth && <Navbar />}
         <Outlet />
         {auth && <Footer />}
+        <Analytics />
       </div>
     )
+
+
 }
 
 
