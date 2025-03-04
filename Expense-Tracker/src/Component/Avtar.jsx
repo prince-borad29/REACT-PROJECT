@@ -26,7 +26,7 @@ const Avtar = () => {
 
             {/* Dropdown (Email) */}
             {isDropdownVisible && (
-                <div className="absolute right-0 bg-white shadow-md rounded-lg py-2 px-4 w-48 border border-gray-300">
+                <div className="absolute md:right-0 bg-white shadow-md rounded-lg py-2 px-4 w-48 border border-gray-300">
                     <p className="text-sm text-gray-700">{email}</p>
                 </div>
             )}

@@ -52,64 +52,60 @@ export default function UpdateExpense({ expense, open ,id}) {
 
             {loader ? <Spinner /> :
 
-                <Dialog open={isModalOpen} onClose={() => !open} className="relative z-10">
-                    <DialogBackdrop
-                        transition
-                        className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
-                    />
+                <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)} className="relative z-10">
+                    <DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
 
-                    <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-                        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                            <DialogPanel
-                                transition
-                                className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-                            >
-                                <div className="bg-gray-600 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                    <div className="sm:flex sm:items-start">
-                                        <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                            <DialogTitle as="h3" className="dark:text-white text-base font-semibold text-gray-900">
-                                                Update Expense
-                                            </DialogTitle>
-                                            <div className="mt-2 ">
-                                                <form onSubmit={handleSubmit(updateData)} >
-                                                    <Input
-                                                        // label="Expense Category"
-                                                        placeholder="Enter category"
-                                                        {...register("category", { required: "Category Is Required" })}
-                                                    />
-                                                    <RadioButtonGroup name="type" control={control} defaultValues={getValues("type")}/>
-                                                    <Input
-                                                        // label="Amount"
-                                                        type="number"
-                                                        placeholder="Enter amount"
-                                                        {...register("amount", { required: "Amount Is Required" })}
-                                                    />
-                                                    <Input
-                                                        type="date"
-                                                        {...register("date", { required: "Date Is Required"})}
-                                                    />
+                    {/* Center Modal */}
+                    <div className="fixed inset-0 z-10 flex items-center justify-center p-4">
+                        <DialogPanel className="w-full max-w-lg bg-white rounded-lg shadow-xl transform transition-all sm:my-8">
+                            <div className="border-none rounded-lg bg-gray-600 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                <div className="sm:flex sm:items-start">
+                                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                                        <DialogTitle as="h3" className="dark:text-white text-base font-semibold text-gray-900">
+                                            Update Expense
+                                        </DialogTitle>
+                                        <div className="mt-2">
+                                            <form onSubmit={handleSubmit(updateData)}>
+                                                <Input
+                                                    placeholder="Enter category"
+                                                    {...register("category", { required: "Category Is Required" })}
+                                                />
+                                                <RadioButtonGroup name="type" control={control} defaultValues={getValues("type")} />
+                                                <Input
+                                                    type="number"
+                                                    placeholder="Enter amount"
+                                                    {...register("amount", { required: "Amount Is Required" })}
+                                                />
+                                                <Input
+                                                    type="date"
+                                                    {...register("date", { required: "Date Is Required" })}
+                                                />
 
-                                                    <div className="dark:bg-gray-600 bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                        <Button type="submit" className="bg-purple-800 text-white mt-4 hover:opacity-80 cursor-pointer">
-                                                            Update Expense
-                                                        </Button>
-                                                        <Button type="button"
-                                                            className="bg-stone-800 text-white mr-4 mt-4 hover:opacity-80 cursor-pointer"
-                                                            onClick={() => setIsModalOpen(false)}
-                                                        >
-                                                            Cancel
-                                                        </Button>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                                <div className="dark:bg-gray-600 bg-gray-50 px-4 py-3 flex flex-col-reverse sm:flex-row sm:justify-end sm:px-6 gap-3 sm:gap-4">
+                                                    <Button
+                                                        type="button"
+                                                        className="bg-stone-800 text-white w-full sm:w-auto px-4 py-2 rounded-md hover:opacity-80 cursor-pointer"
+                                                        onClick={() => setIsModalOpen(false)}
+                                                    >
+                                                        Cancel
+                                                    </Button>
+                                                    <Button
+                                                        type="submit"
+                                                        className="bg-purple-800 text-white w-full sm:w-auto px-4 py-2 rounded-md hover:opacity-80 cursor-pointer"
+                                                    >
+                                                        Update
+                                                    </Button>
+                                                </div>
+
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-
-                            </DialogPanel>
-                        </div>
+                            </div>
+                        </DialogPanel>
                     </div>
                 </Dialog>
+
             }
         </>
     )

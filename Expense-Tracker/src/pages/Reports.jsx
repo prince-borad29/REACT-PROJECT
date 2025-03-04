@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, Legend , ResponsiveContainer} from "recharts";
 import service from '../firebase/config'
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -49,17 +49,18 @@ const Reports = () => {
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Reports & Analytics</h1>
-            <div className="flex justify-center">
-                <PieChart width={400} height={400}>
-                    <Pie data={data} cx="50%" cy="50%" outerRadius={120} fill="#8884d8" dataKey="value">
-                        {data.map((entry, index) => {
-                            // console.log(entry)
-                            return <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                        })}
-                    </Pie>
-                    <Tooltip />
-                    <Legend />
-                </PieChart>
+            <div className="w-full h-[300px] sm:h-[400px] flex justify-center">
+                <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                        <Pie data={data} cx="50%" cy="50%" outerRadius="50%" fill="#8884d8" dataKey="value">
+                            {data.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                        </Pie>
+                        <Tooltip />
+                        <Legend />
+                    </PieChart>
+                </ResponsiveContainer>
             </div>
         </div>
     );

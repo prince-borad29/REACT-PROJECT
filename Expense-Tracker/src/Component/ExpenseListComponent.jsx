@@ -52,16 +52,15 @@ const ExpenseListComponent = () => {
         auth && uid ? fetchData() : ""
     }, [change,uid])
 
-    // var docs = useSelector(state => state.expenseReducer.data);
-    var docs = useSelector(state => state.expenseReducer.data) || []
+    let docs = useSelector(state => state.expenseReducer.data);
+     docs = Array.isArray(docs) ? docs : []
 
     return (
         <div className="p-4 rounded-lg">
 
-            { console.log('docs :: '+docs)}
             {!loader ?
 
-                docs?.map((doc,index) => {
+                docs.map((doc,index) => {
                     // console.log(`ID : ${doc.id} => EXPENSE CATEGORY :: ${doc.data.expense_category} || EXPENSE AMOUNT :: ${doc.data.expense_amount}`);
                     // console.log(`index :: ${index} || data at index => ${doc.data.expense_category}`);
 
