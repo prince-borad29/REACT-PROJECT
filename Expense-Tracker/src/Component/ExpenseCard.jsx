@@ -34,7 +34,7 @@ const ExpenseCard = ({ expense }) => {
             {loader ? <Spinner /> : <div className="dark:bg-gray-600 dark:text-white bg-white shadow-lg rounded-lg p-4 flex justify-between items-center mb-4">
                 <div>
                     <h3 className="text-lg font-semibold">{expense.data.expense_category}</h3>
-                    <p className="text-white text-sm">{expense.data.expense_date}</p>
+                    <p className="dark:text-white text-black text-sm">{expense.data.expense_date}</p>
                     <Button onClick={() => setIsModalOpen(true)} className="mt-2 dark:text-yellow-800 border-amber-200 bg-amber-200 hover:opacity-80 cursor-pointer">Edit</Button>
                     <Button onClick={deleteDoc} className="mt-2 ml-2 dark:text-red-500 border-amber-200 bg-red-200 hover:opacity-80 cursor-pointer">Delete</Button>
                 </div>
