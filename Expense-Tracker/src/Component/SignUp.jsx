@@ -90,7 +90,7 @@ const SignUp = () => {
                     <div>
                         <Button
                             type="submit"
-                            className="flex w-full justify-center rounded-lg bg-indigo-600 px-5 py-3 text-base font-semibold text-white shadow-md hover:bg-indigo-500 transition duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="cursor-pointer flex w-full justify-center rounded-lg bg-indigo-600 px-5 py-3 text-base font-semibold text-white shadow-md hover:bg-indigo-500 transition duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         >
                             Sign Up
                         </Button>
