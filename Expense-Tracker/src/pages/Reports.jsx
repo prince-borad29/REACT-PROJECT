@@ -47,7 +47,8 @@ const Reports = () => {
     }, [])
 
     return (
-        <div className="p-6">
+        data.length > 0 ?
+         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Reports & Analytics</h1>
             <div className="w-full h-[300px] sm:h-[400px] flex justify-center">
                 <ResponsiveContainer width="100%" height="100%">
@@ -63,6 +64,10 @@ const Reports = () => {
                 </ResponsiveContainer>
             </div>
         </div>
+            : <div className="h-svw flex items-center justify-center">
+                <h1>No Transactions Found</h1>
+            </div>
+
     );
 };
 

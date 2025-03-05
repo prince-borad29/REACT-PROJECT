@@ -19,7 +19,7 @@ return (
         </div>
 
         {/* Expense List */}
-        <h2 className="text-xl font-semibold mb-2 dark:bg-gray-800 dark:text-white">Recent Expenses</h2>
+        <h2 className="text-xl font-semibold mb-2 dark:bg-gray-800 dark:text-white">Recent Transactions</h2>
         <ExpenseListComponent />
     </div>
 );

@@ -11,7 +11,7 @@ const Navbar = () => {
     const location = useLocation()
 
     return (
-        <nav className="bg-white dark:bg-gray-700 dark:text-yellow-300 dark:shadow-2xl  p-4 border-gray shadow-md ">
+        <nav className="bg-white dark:bg-gray-700 dark:text-white dark:shadow-2xl  p-4 border-gray shadow-md ">
             <div className="container mx-auto flex justify-between items-center">
                 {/* Logo */}
                 <Link to="/" className="text-2xl font-bold mb-2">
@@ -24,7 +24,7 @@ const Navbar = () => {
                         <Link
                             to="/"
                             className={`hover:text-gray-300 ${location.pathname == "/"
-                                    ? "text-black dark:text-amber-300"
+                                    ? "text-black dark:text-white"
                                     : "text-gray-500"
                                 } `}
                         >
@@ -35,7 +35,7 @@ const Navbar = () => {
                         <Link
                             to="/add-expense"
                             className={` hover:text-gray-300 ${location.pathname == "/add-expense"
-                                    ? "text-black dark:text-amber-300"
+                                    ? "text-black dark:text-white"
                                     : "text-gray-500"
                                 } `}
                         >
@@ -46,7 +46,7 @@ const Navbar = () => {
                         <Link
                             to="/reports"
                             className={` hover:text-gray-300 ${location.pathname == "/reports"
-                                    ? "text-black dark:text-amber-300"
+                                    ? "text-black dark:text-white"
                                     : "text-gray-500"
                                 } `}
                         >
@@ -74,7 +74,7 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <ul className="md:hidden bg-white p-4 dark:bg-gray-700 dark:text-yellow-300">
+                <ul className="md:hidden bg-white p-4 dark:bg-gray-700 dark:text-white">
                     <li>
                         <Link
                             to="/"
@@ -103,7 +103,7 @@ const Navbar = () => {
                         </Link>
                     </li>
                     <li className="mt-2 mb-4">
-                        <Logout />
+                        <Logout className="text-lg"/>
                     </li>
                     <li className="mt-4 mb-2">
                         <DarkTheme />

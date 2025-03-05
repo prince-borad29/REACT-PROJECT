@@ -57,15 +57,11 @@ const ExpenseListComponent = () => {
 
     return (
         <div className="p-4 rounded-lg">
-
             {!loader ?
-
+                docs.length > 0 ?
                 docs.map((doc,index) => {
-                    // console.log(`ID : ${doc.id} => EXPENSE CATEGORY :: ${doc.data.expense_category} || EXPENSE AMOUNT :: ${doc.data.expense_amount}`);
-                    // console.log(`index :: ${index} || data at index => ${doc.data.expense_category}`);
-
                     return <ExpenseCard key={index} expense={doc} />
-                })
+                }) : "No Transactions Found"
                 : <Spinner/>
             }
 
