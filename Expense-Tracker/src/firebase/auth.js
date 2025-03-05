@@ -35,6 +35,7 @@ export class AuthService {
                 // console.log(userAccount.user);
 
                 // return this.login({ email, password });
+                return userAccount.user;
             }
 
             else {

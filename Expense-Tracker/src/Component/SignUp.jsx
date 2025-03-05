@@ -3,7 +3,7 @@ import { Input, Button } from "./index";
 import { useForm } from "react-hook-form";
 import authService from "../firebase/auth";
 import { useDispatch } from "react-redux";
-import { login } from "../store/expenseSlice";
+import { login as loginStore} from "../store/expenseSlice";
 import { Link, useNavigate } from "react-router";
 
 const SignUp = () => {
@@ -17,9 +17,13 @@ const SignUp = () => {
             if (data.pwd.length >= 6) {
                 const user = await authService.createAccount(data.email, data.pwd);
                 if (user) {
-                    await authService.login(data.email, data.pwd);
-                    dispatch(login());
-                    navigate("/");
+                    const authorized = await authService.login(data.email, data.pwd);
+
+                    if(authorized){                        
+                        dispatch(loginStore({id : authorized.uid , email : authorized.email }));
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 1000);}
                 }
             } else {
                 setError(() => "Password Must Be At Least 6 Characters");
